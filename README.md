@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Upper House & Spa
 
-## Getting Started
-
-First, run the development server:
+Next.js (App Router, Tailwind v4) site for upperhouseandspa.co.uk. Static first, structured to move to Payload CMS later.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run dev      # http://localhost:3000
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Path | Purpose |
+| --- | --- |
+| `src/content/` | **All site content + async getters.** Pages only read via `src/content/index.ts`. |
+| `src/content/availability.ts` | Booked date ranges (currently DEMO data). |
+| `src/components/BookingPanel.tsx` | Availability calendar + enquiry form (client). |
+| `src/components/RatesTable.tsx` | Pricing, deliberately separate from availability. |
+| `src/app/api/enquiry/route.ts` | Receives enquiries. Currently logs only — wire up email. |
+| `next.config.ts` | Redirects from the old `.html` URLs. |
+| `public/images/` | Photography; referenced from `src/content/photos.ts`. |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Moving to Payload later
 
-## Learn More
+1. Add Payload collections mirroring `src/content/types.ts`: `cottages`, `reviews`, `experiences`, `enquiries`, `bookings` (or an iCal source).
+2. Re-implement the getters in `src/content/index.ts` / `availability.ts` with `payload.find()`. Signatures stay the same, so no page or component changes.
+3. Add the media host to `images.remotePatterns` in `next.config.ts`.
 
-To learn more about Next.js, take a look at the following resources:
+## TODO before launch
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Replace demo availability in `src/content/availability.ts` (or connect an iCal feed).
+- Wire `/api/enquiry` to email (Resend/Postmark/SMTP) and set `NEXT_PUBLIC_SITE_URL`.
+- Add season date ranges to the rates table once confirmed.
+- Replace/add photography (hero images are in `src/content/photos.ts`).
+- Legacy pages not yet migrated/redirected: history, packing tips, terms & conditions.
+# upperhouse
