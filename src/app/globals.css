@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * Brand: near-black, warm cream and a light sand for large areas, and the logo chevron red as a rare accent.
+ * Solid colour blocks do the separating work — no outlines, no shadows.
+ */
+@theme {
+  --color-brand-950: #141a21; /* same as 700: one dark fill sitewide */
+  --color-brand-900: #141a21; /* same as 700 */
+  --color-brand-800: #1c242d;
+  --color-brand-700: #141a21; /* primary: almost black */
+  --color-brand-500: #4a5560;
+  --color-brand-200: #b9bcbf;
+  --color-brand-100: #e6e6e3;
+  --color-sky: #1d5fe0; /* header: deep electric sky blue, night-sky depth without gloom */
+  --color-cream: #f6f2ea;
+  --color-sand: #e4d9c3; /* light sand: large areas */
+  --color-accent: #c3412b; /* chevron red from the logo: use sparingly */
+  --color-ink: #0b1a2b;
+
+  --font-body: var(--font-open-sans), system-ui, sans-serif;
+  --font-sans: var(--font-montserrat), "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-display: "schoolbook", "Century Schoolbook", Georgia, serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* No outlines or shadows anywhere; keep a bold, solid keyboard focus state. */
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: none;
+  background-color: var(--color-accent) !important;
+  color: #fff !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+
+/* Eased fade for the header over blue-sky hero photos (colour comes from --color-sky). */
+.header-fade {
+  background-image: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-sky) 90%, transparent) 0%,
+    color-mix(in srgb, var(--color-sky) 90%, transparent) 28%,
+    color-mix(in srgb, var(--color-sky) 84%, transparent) 36%,
+    color-mix(in srgb, var(--color-sky) 72%, transparent) 44%,
+    color-mix(in srgb, var(--color-sky) 57%, transparent) 52%,
+    color-mix(in srgb, var(--color-sky) 42%, transparent) 60%,
+    color-mix(in srgb, var(--color-sky) 28%, transparent) 68%,
+    color-mix(in srgb, var(--color-sky) 16%, transparent) 77%,
+    color-mix(in srgb, var(--color-sky) 7%, transparent) 87%,
+    color-mix(in srgb, var(--color-sky) 2%, transparent) 95%,
+    transparent 100%
+  );
+}
+
+/* Header slides down when it becomes fixed after the hero. */
+@keyframes header-in {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+.header-in {
+  animation: header-in 0.35s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .header-in { animation: none; }
+}
+
+/* Uppercase UI (nav, buttons, labels) stays Montserrat; body copy is Open Sans. */
+@layer base {
+  [class*="uppercase"],
+  button {
+    font-family: var(--font-sans);
+  }
 }

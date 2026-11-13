@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 890" role="img" aria-labelledby="t">
+  <title id="t">Black Hill Barn floor plan: ground floor and lower ground floor</title>
+  <style>
+    .wall { fill: none; stroke: #1c2b25; stroke-width: 8; stroke-linejoin: miter; }
+    .room { fill: #f6f1e7; }
+    .thin { fill: none; stroke: #1c2b25; stroke-width: 2; }
+    .door { fill: none; stroke: #1c2b25; stroke-width: 2; }
+    .win  { fill: #cfe3ea; stroke: #1c2b25; stroke-width: 2; }
+    .fix  { fill: #fff; stroke: #1c2b25; stroke-width: 2; }
+    .gap  { fill: #f6f1e7; }
+    text  { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: #1c2b25; text-anchor: middle; }
+    .name { font-size: 17px; font-weight: 700; }
+    .size { font-size: 14px; }
+    .title { font-size: 19px; font-weight: 800; letter-spacing: 0.06em; }
+    .small { font-size: 12px; font-weight: 600; }
+  </style>
+
+  <!-- ============ GROUND FLOOR ============ -->
+  <g transform="translate(60,0)">
+    <rect class="room" x="40" y="60" width="280" height="745"/>
+
+    <!-- internal walls (gaps are doorways) -->
+    <path class="wall" d="M100 250 H320 M238 60 V150 M238 210 V250 M40 615 H60 M120 615 H240 M300 615 H320 M210 615 V805"/>
+    <rect class="wall" x="40" y="60" width="280" height="745"/>
+
+    <!-- exterior door openings -->
+    <rect class="gap" x="34" y="430" width="12" height="60"/>
+    <rect class="gap" x="314" y="430" width="12" height="60"/>
+
+    <!-- doors -->
+    <g class="door">
+      <path d="M100 250 V190 M100 190 A60 60 0 0 0 40 250"/>
+      <path d="M238 210 H178 M178 210 A60 60 0 0 1 238 150"/>
+      <path d="M120 615 V675 M120 675 A60 60 0 0 1 60 615"/>
+      <path d="M300 615 V675 M300 675 A60 60 0 0 1 240 615"/>
+      <path d="M40 490 H-20 M-20 490 A60 60 0 0 1 40 430"/>
+      <path d="M320 430 H380 M380 430 A60 60 0 0 1 320 490"/>
+    </g>
+
+    <!-- windows -->
+    <rect class="win" x="34" y="90" width="12" height="60"/>
+    <rect class="win" x="34" y="300" width="12" height="60"/>
+    <rect class="win" x="34" y="690" width="12" height="60"/>
+    <rect class="win" x="314" y="95" width="12" height="45"/>
+    <rect class="win" x="314" y="300" width="12" height="60"/>
+    <rect class="win" x="314" y="520" width="12" height="60"/>
+    <rect class="win" x="314" y="700" width="12" height="45"/>
+
+    <!-- kitchen counter, sink, hob -->
+    <rect class="fix" x="100" y="258" width="212" height="26"/>
+    <rect class="fix" x="140" y="262" width="34" height="18"/>
+    <rect class="fix" x="240" y="262" width="34" height="18"/>
+
+    <!-- stairs up -->
+    <rect class="fix" x="130" y="545" width="56" height="66"/>
+    <path class="thin" d="M130 556 H186 M130 567 H186 M130 578 H186 M130 589 H186 M130 600 H186"/>
+    <text class="small" x="158" y="538">UP</text>
+
+    <!-- ensuite fixtures -->
+    <rect class="fix" x="250" y="70" width="56" height="50"/>
+    <path class="thin" d="M250 70 L306 120 M306 70 L250 120"/>
+    <ellipse class="fix" cx="282" cy="150" rx="14" ry="11"/>
+    <rect class="fix" x="266" y="196" width="32" height="12"/>
+    <ellipse class="fix" cx="282" cy="224" rx="13" ry="15"/>
+
+    <!-- bathroom fixtures -->
+    <rect class="fix" x="250" y="748" width="62" height="49"/>
+    <path class="thin" d="M250 748 L312 797 M312 748 L250 797"/>
+    <rect class="fix" x="218" y="700" width="14" height="40"/>
+    <ellipse class="fix" cx="288" cy="712" rx="13" ry="15"/>
+
+    <!-- labels -->
+    <text class="name" x="125" y="130">Bedroom 1</text>
+    <text class="size" x="125" y="152">11′ × 10′4″</text>
+    <text class="name" x="180" y="415">Kitchen /</text>
+    <text class="name" x="180" y="437">Reception Room</text>
+    <text class="size" x="180" y="460">20′3″ × 15′1″</text>
+    <text class="name" x="125" y="735">Bedroom 2</text>
+    <text class="size" x="125" y="757">10′4″ × 9′5″</text>
+
+    <text class="title" x="180" y="850">BLACK HILL BARN</text>
+    <text class="title" x="180" y="876">GROUND FLOOR</text>
+  </g>
+
+  <!-- ============ LOWER GROUND FLOOR ============ -->
+  <g transform="translate(490,250)">
+    <rect class="room" x="0" y="0" width="210" height="290"/>
+    <path class="wall" d="M0 190 H110 M170 190 H210"/>
+    <rect class="wall" x="0" y="0" width="210" height="290"/>
+
+    <path class="door" d="M170 190 V130 M170 130 A60 60 0 0 0 110 190"/>
+
+    <rect class="win" x="70" y="-6" width="70" height="12"/>
+    <rect class="win" x="70" y="284" width="70" height="12"/>
+
+    <!-- wardrobe -->
+    <rect class="fix" x="10" y="156" width="90" height="26" stroke-dasharray="5 3"/>
+
+    <!-- ensuite -->
+    <rect class="fix" x="14" y="202" width="62" height="74"/>
+    <path class="thin" d="M14 202 L76 276 M76 202 L14 276"/>
+    <rect class="fix" x="98" y="200" width="30" height="12"/>
+    <ellipse class="fix" cx="113" cy="236" rx="13" ry="16"/>
+
+    <!-- stairs down -->
+    <rect class="fix" x="154" y="212" width="46" height="66"/>
+    <path class="thin" d="M154 224 H200 M154 235 H200 M154 246 H200 M154 257 H200"/>
+    <text class="small" x="177" y="206">DOWN</text>
+
+    <text class="name" x="105" y="75">Bedroom 8</text>
+    <text class="size" x="105" y="97">10′8″ × 10′5″</text>
+
+    <text class="title" x="105" y="345">BLACK HILL BARN</text>
+    <text class="title" x="105" y="371">LOWER GROUND</text>
+    <text class="title" x="105" y="397">FLOOR</text>
+  </g>
+</svg>
