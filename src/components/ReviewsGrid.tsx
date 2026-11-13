@@ -69,7 +69,7 @@ export function ReviewsGrid({ reviews }: { reviews: Review[] }) {
             <figcaption className={`mb-4 text-xs font-bold uppercase tracking-[0.2em] ${r.property === "Starlight Cottage" ? "text-sand" : "text-brand-700"}`}>
               {r.property} · {r.date}
             </figcaption>
-            <blockquote className="leading-relaxed">“{r.quote}”</blockquote>
+            <blockquote className="font-display text-xl font-bold leading-[1.55]">“{r.quote}”</blockquote>
             {r.ratings && (
               <p className="mt-4 text-xs font-bold uppercase tracking-wider opacity-70">
                 Comfort {r.ratings.comfort} · Cleanliness {r.ratings.cleanliness} · Equipment {r.ratings.equipment} · Location {r.ratings.location}

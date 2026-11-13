@@ -98,13 +98,11 @@ export default async function Home() {
         </div>
       </section>
 
-      <SplashImage photo={photos.sunsetSnow} />
-
       {/* Quote */}
       {featured && (
         <section className="bg-cream py-24">
           <Container className="max-w-4xl text-center">
-            <p className="font-medium text-2xl italic leading-snug text-brand-900 sm:text-3xl">“{featured.quote}”</p>
+            <p className="font-display text-balance text-2xl font-bold leading-[1.6] text-brand-900 sm:text-3xl sm:leading-[1.6]">“{featured.quote}”</p>
             <p className="mt-6 text-xs font-bold uppercase tracking-[0.24em] text-brand-700">
               Guest at {featured.property}, {featured.date}
             </p>
@@ -116,9 +114,9 @@ export default async function Home() {
       {/* Experience strip */}
       <section className="grid md:grid-cols-3">
         {[
-          { t: "Walk", d: "Black Mountains & Offa’s Dyke from the door", p: photos.cabinView },
-          { t: "Stargaze", d: "International Dark Sky skies", p: photos.blackHill },
-          { t: "Explore", d: "Hay-on-Wye, Abergavenny & the Marches", p: photos.barnInterior },
+          { t: "Walk", d: "Black Mountains & Offa’s Dyke from the door", p: photos.walkBlackMountains },
+          { t: "Stargaze", d: "International Dark Sky skies", p: photos.aurora },
+          { t: "Explore", d: "Hay-on-Wye, Abergavenny & the Marches", p: photos.riverWye },
         ].map((x) => (
           <Link key={x.t} href="/experience" className="group relative block">
             <Photo photo={x.p} sizes="(min-width:768px) 33vw, 100vw" className="aspect-square md:aspect-[4/5]" />

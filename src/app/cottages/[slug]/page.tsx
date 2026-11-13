@@ -154,7 +154,7 @@ export default async function CottagePage({ params }: PageProps<"/cottages/[slug
             <div className="grid gap-4 md:grid-cols-3">
               {reviews.slice(0, 3).map((r) => (
                 <figure key={r.date + r.quote.slice(0, 10)} className="rounded-3xl bg-white p-8">
-                  <blockquote className="text-base leading-relaxed">“{r.quote}”</blockquote>
+                  <blockquote className="font-display text-xl font-bold leading-[1.55]">“{r.quote}”</blockquote>
                   <figcaption className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-brand-700">{r.date}</figcaption>
                 </figure>
               ))}
