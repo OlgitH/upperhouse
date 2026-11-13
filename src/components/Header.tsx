@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { nav, site } from "@/content";
 import { HeaderShell } from "./HeaderShell";
+import { MobileMenu } from "./MobileMenu";
 import { NavDropdown } from "./NavDropdown";
 import { Container, navLinkCls } from "./ui";
 
@@ -46,40 +47,7 @@ export function Header() {
         <div className="flex h-full items-center justify-end lg:justify-start">
           <DesktopLinks items={right} align="start" />
 
-          {/* Mobile menu (no JS needed) */}
-          <details className="group lg:hidden">
-            <summary className="cursor-pointer list-none bg-sand px-5 py-3 text-xs font-bold uppercase tracking-[0.18em] text-ink">
-              <span className="group-open:hidden">Menu</span>
-              <span className="hidden group-open:inline">Close</span>
-            </summary>
-            <nav aria-label="Mobile" className="absolute inset-x-0 top-full bg-brand-950">
-              <ul className="mx-auto max-w-7xl px-5 py-4 text-center sm:px-8">
-                {nav.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className="block py-3 text-lg font-medium uppercase tracking-[0.16em]">
-                      {item.label}
-                    </Link>
-                    {"children" in item && (
-                      <ul className="mb-2 bg-brand-800">
-                        {item.children.map((c) => (
-                          <li key={c.href}>
-                            <Link href={c.href} className="block px-4 py-3 text-sm uppercase tracking-[0.14em]">
-                              {c.label}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </li>
-                ))}
-                <li className="pt-3">
-                  <a href={site.phoneHref} className="block bg-sand px-5 py-4 text-center font-bold text-ink">
-                    Call {site.phone}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </details>
+          <MobileMenu items={nav} phone={site.phone} phoneHref={site.phoneHref} />
         </div>
       </Container>
     </HeaderShell>
