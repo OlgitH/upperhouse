@@ -8,6 +8,7 @@ const variants = {
   sand: "bg-sand text-ink hover:bg-accent hover:text-white",
   blue: "bg-brand-700 text-white hover:bg-accent hover:text-white",
   light: "bg-white text-brand-900 hover:bg-accent hover:text-white",
+  slate: "bg-brand-500 text-white hover:bg-accent hover:text-white",
 } as const;
 
 export function ButtonLink({

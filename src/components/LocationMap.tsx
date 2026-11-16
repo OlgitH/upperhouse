@@ -14,7 +14,7 @@ export function LocationMap({ className = "" }: { className?: string }) {
         src={src}
         loading="lazy"
         referrerPolicy="no-referrer"
-        className="block h-[380px] w-full bg-brand-100 sm:h-[460px]"
+        className="block h-[380px] w-full rounded-3xl bg-brand-100 sm:h-[460px]"
       />
       <p className="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-sm font-semibold">
         <a

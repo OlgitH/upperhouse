@@ -5,7 +5,7 @@ export const cottages: Cottage[] = [
   {
     slug: "starlight-cottage",
     name: "Starlight Cottage",
-    strapline: "A secluded bolthole for two, with the darkest skies in Wales.",
+    strapline: "A secluded bolthole for one or two, with the darkest skies in Wales.",
     audience: "Couples and quiet retreats",
     sleeps: 2,
     sleepsExtra: 2,

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "./Logo";
 import Link from "next/link";
 import { nav, site } from "@/content";
 import { HeaderShell } from "./HeaderShell";
@@ -41,7 +41,7 @@ export function Header() {
         </div>
 
         <Link href="/" aria-label={`${site.name} home`} className="flex px-6 lg:px-10">
-          <Image src="/brand/logo.png" alt={site.name} width={600} height={137} priority className="h-11 w-auto lg:h-14" />
+          <Logo className="h-11 lg:h-14" />
         </Link>
 
         <div className="flex h-full items-center justify-end lg:justify-start">

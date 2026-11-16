@@ -2,8 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { navLinkBase } from "./ui";
+
+/**
+ * The panel's bottom edge follows the skyline of Black Hill in the hero photo: high on the left,
+ * a long gentle slope, then dropping away to the right. Offsets are measured up from the panel's bottom.
+ */
+const RIDGE =
+  "polygon(0 0, 100% 0, 100% 100%, 85% calc(100% - 9px), 79% calc(100% - 24px), 73% calc(100% - 44px), 67% calc(100% - 59px), 61% calc(100% - 64px), 42% calc(100% - 70px), 20% calc(100% - 77px), 0 calc(100% - 90px))";
 
 type Child = {
   label: string;
@@ -13,70 +22,80 @@ type Child = {
 };
 
 /**
- * Nav item with a feature panel. The label still links to its page; the red
- * chevron is a button that toggles the panel (click / Enter / Space).
+ * Nav item with a feature panel. The whole item is a button that toggles the
+ * panel on click / Enter / Space (not on hover).
  * Closes on outside click, Escape, or choosing a tile.
  */
 export function NavDropdown({ label, items }: { label: string; items: readonly Child[] }) {
   const [open, setOpen] = useState(false);
+  // The page hero the panel and white-out are drawn into (found when the menu is opened).
+  const [heroEl, setHeroEl] = useState<HTMLElement | null>(null);
+  const pathname = usePathname();
   const ref = useRef<HTMLLIElement>(null);
   const panel = useRef<HTMLDivElement>(null);
-  const [reach, setReach] = useState<number>();
 
-  // Stretch the panel down to just above the bottom of the page hero (only while the header sits over the hero).
-  useLayoutEffect(() => {
-    const measure = () => {
-      const hero = [...document.querySelectorAll<HTMLElement>("[data-hero]")].find((h) => h.offsetHeight > 0);
-      const p = panel.current;
-      if (!hero || !p) return setReach(undefined);
-      const h = hero.getBoundingClientRect().bottom - p.getBoundingClientRect().top - 48; // stop just short of the hero's bottom edge
-      setReach(h > 288 ? Math.round(h) : undefined);
-    };
-    if (open) measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [open]);
+  // Find the hero up front (and again after every page change), so the panel is already in place, closed, before the first click and fades in like every later one.
+  useEffect(() => {
+    const id = requestAnimationFrame(() =>
+      setHeroEl([...document.querySelectorAll<HTMLElement>("[data-hero]")].find((h) => h.offsetHeight > 0) ?? null),
+    );
+    return () => cancelAnimationFrame(id);
+  }, [pathname]);
 
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+      const t = e.target as Node;
+      if (ref.current && !ref.current.contains(t) && !panel.current?.contains(t)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
     };
+    // Scrolling away closes it
+    const startY = window.scrollY;
+    const onScroll = () => {
+      if (Math.abs(window.scrollY - startY) > 40) setOpen(false);
+    };
     document.addEventListener("mousedown", onDown);
     document.addEventListener("keydown", onKey);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       document.removeEventListener("mousedown", onDown);
       document.removeEventListener("keydown", onKey);
+      window.removeEventListener("scroll", onScroll);
     };
   }, [open]);
 
   const active = open ? "!decoration-accent" : "";
   const panelId = `nav-panel-${label.toLowerCase()}`;
 
-  const canHover = () => window.matchMedia("(hover: hover)").matches;
-
-  // Whole item is the trigger. Mouse: hover opens, click keeps it open. Touch / keyboard: toggle.
-  const onTrigger = (e: React.MouseEvent) => {
-    if (e.detail === 0 || !canHover()) setOpen((o) => !o);
-    else setOpen(true);
+  // Click / tap / Enter / Space toggles the panel; hovering does nothing.
+  const onTrigger = () => {
+    // The panel and the white-out are drawn inside the page hero, under the hero's blue fade.
+    setHeroEl([...document.querySelectorAll<HTMLElement>("[data-hero]")].find((h) => h.offsetHeight > 0) ?? null);
+    setOpen((o) => !o);
   };
 
   return (
-    <li
-      ref={ref}
-      className="group flex"
-      onMouseEnter={() => canHover() && setOpen(true)}
-      onMouseLeave={() => canHover() && setOpen(false)}
-    >
+    <li ref={ref} className="group flex">
+      {/* White-out over just the hero while the panel is open (drawn inside the hero, so the header and panel stay on top) */}
+      {heroEl &&
+        createPortal(
+          <div
+            aria-hidden
+            className={`pointer-events-none absolute inset-x-0 bottom-0 top-20 z-10 bg-white/90 lg:top-24 transition-opacity duration-700 ease-in-out motion-reduce:transition-none ${
+              open ? "opacity-100" : "opacity-0"
+            }`}
+          />,
+          heroEl,
+        )}
+
       <button
         type="button"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={onTrigger}
-        className={`${navLinkBase} px-5 ${active}`}
+        className={`${navLinkBase} cursor-pointer px-5 ${active}`}
       >
         {label}
         <svg
@@ -90,14 +109,12 @@ export function NavDropdown({ label, items }: { label: string; items: readonly C
         </svg>
       </button>
 
-      {/* Invisible bridge so the pointer can travel from the link down to the panel without closing it */}
-      {open && <span aria-hidden className="absolute inset-x-0 top-full h-10" />}
-
+      {heroEl && createPortal(
       <div
         id={panelId}
         ref={panel}
-        style={reach ? { height: reach } : undefined}
-        className={`absolute inset-x-0 top-full bg-brand-700 transition-[opacity,visibility] duration-300 ease-out motion-reduce:transition-none ${
+        style={{ clipPath: RIDGE }}
+        className={`absolute inset-0 z-[15] pt-20 lg:pt-24 transition-[opacity,visibility] duration-700 ease-in-out motion-reduce:transition-none ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >
@@ -122,7 +139,6 @@ export function NavDropdown({ label, items }: { label: string; items: readonly C
                   <Image src={c.photo.src} alt="" fill sizes="50vw" className="object-cover" style={{ objectPosition: c.photo.focus }} />
                   <span className="absolute inset-0 bg-black/35 transition-colors group-hover/tile:bg-black/20" />
                 </span>
-                <span aria-hidden className="absolute inset-x-0 bottom-0 h-1 bg-accent opacity-0 transition-opacity group-hover/tile:opacity-100" />
                 <span className="relative px-8">
                   <span className="block text-2xl font-bold uppercase tracking-[0.18em]">{c.label}</span>
                   <span className="mt-2 block text-xs font-semibold uppercase tracking-[0.22em]">{c.note}</span>
@@ -132,7 +148,9 @@ export function NavDropdown({ label, items }: { label: string; items: readonly C
             );
           })}
         </ul>
-      </div>
+      </div>,
+        heroEl,
+      )}
     </li>
   );
 }

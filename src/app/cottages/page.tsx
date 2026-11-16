@@ -14,10 +14,10 @@ export default async function CottagesPage() {
   const cottages = await getCottages();
   return (
     <>
-      <PageHero photo={photos.barnExterior} position="50% 55%" mobilePosition="50% 55%" title="Two beautifully restored mountain barns.">
+      <PageHero photo={photos.barnExterior} position="50% 55%" mobilePosition="50% 55%" title="Two beautifully restored mountain barns." introLeft>
         Wood burners, wonderfully comfortable beds, designer furniture, original art and WiFi, with the sauna and spa a few steps away.
       </PageHero>
-      <section className="pb-20 pt-16 sm:pt-24">
+      <section className="pb-20">
         <Container className="space-y-6">
           {cottages.map((c, i) => (
             <article key={c.slug} className={`grid overflow-hidden rounded-3xl lg:grid-cols-2 ${i % 2 ? "lg:[&>*:first-child]:order-2" : ""}`}>

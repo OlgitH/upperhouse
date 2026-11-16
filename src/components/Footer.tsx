@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { Logo } from "./Logo";
 import { site } from "@/content";
 import { Container } from "./ui";
 
@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="bg-brand-950 text-white">
       <Container className="grid gap-12 py-16 md:grid-cols-2">
         <div>
-          <Image src="/brand/logo.png" alt={site.name} width={600} height={137} className="h-16 w-auto" />
+          <Logo className="h-16" />
           <address className="mt-6 not-italic leading-relaxed text-brand-200">
             {site.address.map((l) => (
               <span key={l} className="block">{l}</span>

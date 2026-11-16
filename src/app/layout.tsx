@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Open_Sans } from "next/font/google";
+import { Bebas_Neue, Libre_Baskerville, Montserrat, Open_Sans } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -8,6 +8,8 @@ import "./globals.css";
 
 // Open Sans for body copy, Montserrat for nav/buttons/labels, Adobe Fonts Schoolbook for display headings.
 const montserrat = Montserrat({ variable: "--font-montserrat", subsets: ["latin"] });
+const baskerville = Libre_Baskerville({ variable: "--font-baskerville", subsets: ["latin"], weight: ["400", "700"], style: ["normal", "italic"] });
+const logoFont = Bebas_Neue({ variable: "--font-logo", subsets: ["latin"], weight: "400" });
 const openSans = Open_Sans({ variable: "--font-open-sans", subsets: ["latin"], style: ["normal", "italic"] });
 
 export const metadata: Metadata = {
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en-GB" className={`${montserrat.variable} ${openSans.variable}`}>
+    <html lang="en-GB" className={`${montserrat.variable} ${openSans.variable} ${baskerville.variable} ${logoFont.variable}`}>
       <head>
         {/* Adobe Fonts kit: "schoolbook" is the display face */}
         <link rel="stylesheet" href="https://use.typekit.net/dwu5ljd.css" />

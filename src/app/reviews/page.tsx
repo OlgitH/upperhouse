@@ -12,9 +12,7 @@ export default async function ReviewsPage() {
   const reviews = await getReviews();
   return (
     <>
-      <PageHero photo={photos.barnInterior} position="50% 50%" mobilePosition="50% 50%" title="In our guests’ words.">
-        Discover the reviews our guests post.
-      </PageHero>
+      <PageHero photo={photos.barnInterior} position="50% 50%" mobilePosition="50% 50%" title="In our guests’ words." />
       <section className="pb-20 pt-16 sm:pt-24">
         <ReviewsGrid reviews={reviews} />
       </section>

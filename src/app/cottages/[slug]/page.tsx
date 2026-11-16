@@ -1,3 +1,4 @@
+import { ListIcon } from "@/components/ListIcon";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getBookedRanges, getCottage, getCottages, getReviews } from "@/content";
@@ -67,53 +68,56 @@ export default async function CottagePage({ params }: PageProps<"/cottages/[slug
             {cottage.intro.map((p) => <p key={p}>{p}</p>)}
           </div>
           <div className="grid grid-cols-2 gap-3">
-            <Photo photo={a} sizes="(min-width:1024px) 30vw, 100vw" className="col-span-2 aspect-[16/10]" />
-            <Photo photo={b} sizes="(min-width:1024px) 15vw, 50vw" className="aspect-square" />
-            <Photo photo={c} sizes="(min-width:1024px) 15vw, 50vw" className="aspect-square" />
+            <Photo photo={a} sizes="(min-width:1024px) 30vw, 100vw" className="col-span-2 aspect-[16/10] rounded-3xl" />
+            <Photo photo={b} sizes="(min-width:1024px) 15vw, 50vw" className="aspect-square rounded-3xl" />
+            <Photo photo={c} sizes="(min-width:1024px) 15vw, 50vw" className="aspect-square rounded-3xl" />
           </div>
         </Container>
       </section>
 
-      {/* Details: boxes in three columns; dog friendly is plain typography, beside a lone last box or below a full row */}
-      <section className="pb-24">
+      {/* Details: sand band. Facilities sits first, in a rounded white panel; the other lists follow on the 12-column grid, three per row */}
+      <section className="bg-sand-light py-20 text-ink">
         <Container>
           {(() => {
-            const boxes = [
+            const groups = [
               ...cottage.layout,
-              { title: "Facilities", items: cottage.facilities },
               { title: "Outdoor living", items: cottage.outdoor },
+              { title: "Dog friendly", items: cottage.dogs },
             ];
-            const lone = boxes.length % 3 === 1;
-            const dogs = (
-              <div className={lone ? "p-8 sm:p-10 lg:col-span-2" : "mt-20 max-w-3xl"}>
-                <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.005em] text-brand-900">Dog friendly</h3>
-                <ul className="space-y-4 font-display text-lg font-bold leading-snug text-ink">
-                  {cottage.dogs.map((it) => (
-                    <li key={it} className="flex gap-3"><span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand-700" />{it}</li>
-                  ))}
-                </ul>
-              </div>
+            const list = "space-y-7 text-base font-normal leading-snug";
+            const item = (it: string) => (
+              <li key={it} className="flex gap-3"><ListIcon text={it} className="mt-px h-5 w-5 shrink-0" />{it}</li>
             );
-            return (
+            // A group left alone on its own row would sit under the tallest list above it. From lg up, tuck it under the
+            // left-hand list instead; below lg it keeps its normal place at the end (the copy that isn't wanted is display:none).
+            const lone = groups.length % 3 === 1 && groups.length > 1;
+            const block = (blk: (typeof groups)[number]) => (
               <>
-                <div className="grid gap-4 lg:grid-cols-3">
-                  {boxes.map((blk, i) => {
-                    const dark = i % 3 === 0;
-                    return (
-                      <div key={blk.title} className={`rounded-3xl p-8 sm:p-10 ${dark ? "bg-brand-700 text-white" : i % 3 === 1 ? "bg-sand text-ink" : "bg-brand-100 text-ink"}`}>
-                        <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.005em]">{blk.title}</h3>
-                        <ul className="space-y-4 font-display text-lg font-bold leading-snug">
-                          {blk.items.map((it) => (
-                            <li key={it} className="flex gap-3"><span className={`mt-[9px] h-2 w-2 shrink-0 rounded-full ${dark ? "bg-accent" : "bg-brand-700"}`} />{it}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    );
-                  })}
-                  {lone && dogs}
-                </div>
-                {!lone && dogs}
+                <span aria-hidden className="mb-4 block h-1 w-4 bg-accent" />
+                <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.005em]">{blk.title}</h3>
+                <ul className={list}>{blk.items.map(item)}</ul>
               </>
+            );
+            const tucked = lone ? groups[groups.length - 1] : undefined;
+            return (
+              <div className="grid gap-x-8 gap-y-14 lg:grid-cols-12">
+                <div className="relative z-10 -mt-28 rounded-3xl bg-white p-8 text-ink sm:p-12 lg:col-span-12">
+                  <span aria-hidden className="mb-4 block h-1 w-4 bg-accent" />
+                  <h3 className="mb-8 font-display text-xl font-semibold uppercase tracking-[0.005em] text-brand-900">Facilities</h3>
+                  <ul className={`${list} lg:grid lg:grid-cols-3 lg:gap-x-8 lg:gap-y-7 lg:space-y-0`}>
+                    {cottage.facilities.map(item)}
+                  </ul>
+                </div>
+                {groups.map((blk, i) => {
+                  if (blk === tucked) return <div key={blk.title} className="lg:hidden">{block(blk)}</div>;
+                  return (
+                    <div key={blk.title} className="lg:col-span-4">
+                      <div>{block(blk)}</div>
+                      {i === 0 && tucked && <div className="mt-14 hidden lg:block">{block(tucked)}</div>}
+                    </div>
+                  );
+                })}
+              </div>
             );
           })()}
         </Container>

@@ -248,7 +248,7 @@ function EnquiryForm({
 
   if (status === "sent") {
     return (
-      <div className="flex flex-col justify-center rounded-3xl bg-brand-700 p-8 text-white sm:p-10">
+      <div className="flex flex-col justify-center rounded-3xl bg-slate-blue p-8 text-white sm:p-10">
         <p className="font-display text-2xl font-semibold">Thank you.</p>
         <p className="mt-4 text-base text-brand-100">
           Your request for {cottage.name}, {start && fmt(start)} to {end && fmt(end)}, is with us.
@@ -262,8 +262,8 @@ function EnquiryForm({
   const label = "mb-1.5 block text-xs font-bold uppercase tracking-[0.16em] text-brand-100";
 
   return (
-    <form onSubmit={submit} className="relative space-y-5 rounded-3xl bg-brand-700 p-6 text-white sm:p-8">
-      <div className="rounded-2xl bg-brand-800 p-5">
+    <form onSubmit={submit} className="relative space-y-5 rounded-3xl bg-slate-blue p-6 text-white sm:p-8">
+      <div className="rounded-2xl bg-slate-blue-dark p-5">
         <p className="text-xs font-bold uppercase tracking-[0.2em] text-sand">Your stay · {cottage.name}</p>
         {start && end ? (
           <>

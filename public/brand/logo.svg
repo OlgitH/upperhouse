@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 376.13 121.72">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: BebasNeue-Regular, 'Bebas Neue';
+        font-size: 101.11px;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-family: UniversNextPro-LightExt, 'Univers Next Pro';
+        font-size: 26.54px;
+        font-weight: 300;
+      }
+
+      .cls-3 {
+        letter-spacing: -.07em;
+      }
+
+      .cls-4 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-6 {
+        letter-spacing: -.04em;
+      }
+
+      .cls-7 {
+        letter-spacing: .04em;
+      }
+
+      .cls-8 {
+        letter-spacing: .03em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <text class="cls-1" transform="translate(0 85.94)"><tspan class="cls-5" x="0" y="0">UPPER</tspan><tspan class="cls-7" x="174.92" y="0"> </tspan><tspan class="cls-6" x="195.24" y="0">HOUSE</tspan></text>
+      <text class="cls-2" transform="translate(105.09 116.06)"><tspan class="cls-8" x="0" y="0">C</tspan><tspan class="cls-4" x="22.69" y="0">O</tspan><tspan class="cls-8" x="46.29" y="0">T</tspan><tspan class="cls-3" x="65.48" y="0">T</tspan><tspan class="cls-8" x="82.13" y="0">AGES</tspan></text>
+    </g>
+  </g>
+</svg>

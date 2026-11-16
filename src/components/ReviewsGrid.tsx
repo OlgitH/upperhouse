@@ -2,6 +2,7 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import type { Review } from "@/content";
+import { Reveal } from "@/components/Reveal";
 import { Container } from "@/components/ui";
 
 const FILTERS = ["All reviews", "Starlight Cottage", "Black Hill Barn"] as const;
@@ -54,18 +55,18 @@ export function ReviewsGrid({ reviews }: { reviews: Review[] }) {
               type="button"
               aria-pressed={filter === f}
               onClick={() => choose(f)}
-              className={`font-display text-xl font-bold text-ink underline-offset-8 transition-colors hover:text-accent ${filter === f ? "underline decoration-2" : "no-underline"}`}>
+              className={`cursor-pointer font-display text-2xl font-bold text-ink underline-offset-8 transition-colors hover:text-accent ${filter === f ? "underline decoration-accent decoration-4" : "no-underline"}`}>
               {f}
             </button>
           ))}
         </div>
       </Container>
       <Container className="columns-1 gap-4 md:columns-2 lg:columns-3 [&>*]:mb-4">
-        {shown.map(({ r, i }) => (
+        {shown.map(({ r, i }, n) => (
+          <Reveal key={i} once delay={(n % 3) * 100} className="break-inside-avoid">
           <figure
-            key={i}
             ref={(el) => { if (el) cards.current.set(i, el); else cards.current.delete(i); }}
-            className={`break-inside-avoid rounded-3xl p-8 transition-[opacity,transform] duration-200 ${pending && !matches(r, pending) ? "scale-95 opacity-0" : ""} ${r.property === "Starlight Cottage" ? "bg-brand-700 text-white" : "bg-sand"}`}>
+            className={`rounded-3xl p-8 transition-[opacity,transform] duration-200 ${pending && !matches(r, pending) ? "scale-95 opacity-0" : ""} ${r.property === "Starlight Cottage" ? "bg-brand-500 text-white" : "bg-sand"}`}>
             <figcaption className={`mb-4 text-xs font-bold uppercase tracking-[0.2em] ${r.property === "Starlight Cottage" ? "text-sand" : "text-brand-700"}`}>
               {r.property} · {r.date}
             </figcaption>
@@ -76,6 +77,7 @@ export function ReviewsGrid({ reviews }: { reviews: Review[] }) {
               </p>
             )}
           </figure>
+          </Reveal>
         ))}
       </Container>
     </>
