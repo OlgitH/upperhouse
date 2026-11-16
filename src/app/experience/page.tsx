@@ -26,8 +26,8 @@ export default async function ExperiencePage() {
                 <Photo photo={x.photo} sizes="(min-width:1024px) 50vw, 100vw" className={`min-h-[340px] ${i % 2 ? "lg:order-2" : ""}`} />
                 <div className={`flex flex-col justify-center p-8 sm:p-14 ${["bg-brand-700 text-white", "bg-sand", "bg-brand-900 text-white", "bg-brand-100"][i % 4]}`}>
                   <p className={`mb-3 text-base italic ${i % 4 === 1 || i % 4 === 3 ? "text-accent" : "text-sand"}`}>{x.summary}</p>
-                  <h2 className="font-display uppercase tracking-[0.06em] text-2xl font-semibold">{x.title}</h2>
-                  <p className="mt-5 max-w-xl text-base leading-relaxed opacity-90">{x.body}</p>
+                  <h2 className="font-display uppercase tracking-[0.005em] text-2xl font-semibold">{x.title}</h2>
+                  <p className="mt-5 max-w-xl text-[1.125rem] leading-relaxed opacity-90">{x.body}</p>
                 </div>
               </article>
             </Container>

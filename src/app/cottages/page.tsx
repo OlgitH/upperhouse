@@ -24,7 +24,7 @@ export default async function CottagesPage() {
               <Photo photo={c.hero} sizes="(min-width:1024px) 50vw, 100vw" className="min-h-[360px]" />
               <div className={`flex flex-col justify-center p-8 sm:p-14 bg-brand-700 text-white`}>
                 <p className="text-xs font-bold uppercase tracking-[0.24em] text-sand">Sleeps {c.sleeps} (+{c.sleepsExtra} by arrangement)</p>
-                <h2 className="mt-3 font-display uppercase tracking-[0.06em] text-3xl font-semibold">{c.name}</h2>
+                <h2 className="mt-3 font-display uppercase tracking-[0.005em] text-3xl font-semibold">{c.name}</h2>
                 <p className="mt-4 text-base text-brand-100">{c.strapline}</p>
                 <p className="mt-4 text-sm text-brand-200">{c.bedrooms} · {c.bathrooms}</p>
                 <div className="mt-8 flex flex-wrap gap-3">

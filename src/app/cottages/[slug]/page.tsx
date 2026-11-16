@@ -62,7 +62,7 @@ export default async function CottagePage({ params }: PageProps<"/cottages/[slug
       {/* Story + gallery */}
       <section className="py-24">
         <Container className="grid gap-14 lg:grid-cols-[1fr_1.1fr]">
-          <div className="space-y-5 text-base leading-relaxed text-ink/85">
+          <div className="space-y-5 text-[1.125rem] leading-relaxed text-ink/85">
             <p className="font-display text-balance text-2xl font-bold leading-[1.5] text-brand-900 sm:text-3xl sm:leading-[1.5]">{cottage.strapline}</p>
             {cottage.intro.map((p) => <p key={p}>{p}</p>)}
           </div>
@@ -86,7 +86,7 @@ export default async function CottagePage({ params }: PageProps<"/cottages/[slug
             const lone = boxes.length % 3 === 1;
             const dogs = (
               <div className={lone ? "p-8 sm:p-10 lg:col-span-2" : "mt-20 max-w-3xl"}>
-                <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.06em] text-brand-900">Dog friendly</h3>
+                <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.005em] text-brand-900">Dog friendly</h3>
                 <ul className="space-y-4 font-display text-lg font-bold leading-snug text-ink">
                   {cottage.dogs.map((it) => (
                     <li key={it} className="flex gap-3"><span className="mt-[9px] h-2 w-2 shrink-0 rounded-full bg-brand-700" />{it}</li>
@@ -101,7 +101,7 @@ export default async function CottagePage({ params }: PageProps<"/cottages/[slug
                     const dark = i % 3 === 0;
                     return (
                       <div key={blk.title} className={`rounded-3xl p-8 sm:p-10 ${dark ? "bg-brand-700 text-white" : i % 3 === 1 ? "bg-sand text-ink" : "bg-brand-100 text-ink"}`}>
-                        <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.06em]">{blk.title}</h3>
+                        <h3 className="mb-6 font-display text-xl font-semibold uppercase tracking-[0.005em]">{blk.title}</h3>
                         <ul className="space-y-4 font-display text-lg font-bold leading-snug">
                           {blk.items.map((it) => (
                             <li key={it} className="flex gap-3"><span className={`mt-[9px] h-2 w-2 shrink-0 rounded-full ${dark ? "bg-accent" : "bg-brand-700"}`} />{it}</li>

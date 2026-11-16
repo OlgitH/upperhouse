@@ -31,10 +31,10 @@ export default async function Home() {
       <section className="py-24">
         <Container className="grid items-center gap-14 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold uppercase leading-tight tracking-[0.06em] text-brand-900 sm:text-4xl">
+            <h2 className="font-display text-2xl font-semibold uppercase leading-tight tracking-[-0.01em] text-brand-900 sm:text-4xl">
               {site.tagline}
             </h2>
-            <div className="mt-8 space-y-5 text-base leading-relaxed text-ink/85">
+            <div className="mt-8 space-y-5 text-[1.125rem] leading-relaxed text-ink/85">
               <p>
                 Arriving at Upper House &amp; Spa, the spirit of the place transports you into a different
                 world, where the past meets the present. The views are breathtaking. You immediately feel
@@ -72,7 +72,7 @@ export default async function Home() {
                   <p className="text-xs font-bold uppercase tracking-[0.24em] text-sand">
                     Sleeps {c.sleeps} (+{c.sleepsExtra}) · {c.audience}
                   </p>
-                  <h3 className="mt-3 font-display uppercase tracking-[0.06em] text-2xl font-semibold">{c.name}</h3>
+                  <h3 className="mt-3 font-display uppercase tracking-[0.005em] text-2xl font-semibold">{c.name}</h3>
                   <p className="mt-3 text-base text-brand-100">{c.strapline}</p>
                   <span className="mt-6 inline-block rounded-full bg-sand px-5 py-3 text-xs font-bold uppercase tracking-[0.16em] text-ink group-hover:bg-white">
                     View &amp; check dates →
@@ -121,7 +121,7 @@ export default async function Home() {
           <Link key={x.t} href="/experience" className="group relative block">
             <Photo photo={x.p} sizes="(min-width:768px) 33vw, 100vw" className="aspect-square md:aspect-[4/5]" />
             <div className="absolute inset-x-0 bottom-0 bg-brand-900 p-6 text-white transition-colors group-hover:bg-accent group-hover:text-white">
-              <p className="font-display uppercase tracking-[0.06em] text-xl font-semibold">{x.t}</p>
+              <p className="font-display uppercase tracking-[0.005em] text-xl font-semibold">{x.t}</p>
               <p className="mt-1 text-sm opacity-80">{x.d}</p>
             </div>
           </Link>

@@ -175,7 +175,7 @@ function Month({
 
   return (
     <div>
-      <h3 className="mb-4 font-display uppercase tracking-[0.06em] text-lg font-semibold text-brand-900">{monthLabel(y, m)}</h3>
+      <h3 className="mb-4 font-display uppercase tracking-[0.005em] text-lg font-semibold text-brand-900">{monthLabel(y, m)}</h3>
       <div className="grid grid-cols-7 gap-1 text-center">
         {DOW.map((d) => (
           <span key={d} className="pb-2 text-[11px] font-bold uppercase tracking-wider text-brand-700">{d}</span>

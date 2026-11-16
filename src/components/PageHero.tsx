@@ -29,7 +29,7 @@ export function PageHero({
       <div aria-hidden className="header-fade pointer-events-none absolute inset-x-0 top-0 h-40 lg:h-48" />
       <Container className="relative pb-20 pt-36">
         <h1
-          className={`font-display mx-auto max-w-5xl text-balance font-bold uppercase leading-[1.15] tracking-[0.05em] ${
+          className={`font-display mx-auto max-w-5xl text-balance font-bold uppercase leading-[1.15] tracking-[0em] ${
             tall ? "text-2xl sm:text-4xl lg:text-5xl" : "text-3xl sm:text-4xl lg:text-5xl"
           }`}
         >
